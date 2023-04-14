@@ -48,7 +48,7 @@ env:
   ECR_REPOSITORY: ecs_app           # set this to your Amazon ECR repository name
   ECS_SERVICE: ecs_service_app                 # set this to your Amazon ECS service name
   ECS_CLUSTER: ecs_app_cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: ecs_app:1 # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: ecs_app # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: ecs_app           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
@@ -65,6 +65,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: Download task definition
+      run: |
+        aws ecs describe-task-definition --task-definition my-task-definition-family --query taskDefinition > task-definition.json
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
