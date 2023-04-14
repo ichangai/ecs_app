@@ -75,7 +75,7 @@ jobs:
 
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition ecs_app --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition ecs_app --query taskDefinition > task_definition.json
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
